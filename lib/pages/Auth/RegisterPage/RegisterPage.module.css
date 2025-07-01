@@ -1,0 +1,213 @@
+@import '../../../styles/tokens.css';
+
+.passwordField {
+  width: 100%;
+}
+
+.passwordToggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--animation-duration-base) var(--animation-ease-in-out);
+}
+
+.passwordToggle:hover {
+  color: var(--color-text-secondary);
+}
+
+.passwordToggle:focus {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Password Strength Indicator */
+.passwordStrength {
+  margin-top: var(--spacing-3);
+  padding: var(--spacing-3);
+  background-color: var(--color-background-secondary);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-border-primary);
+  animation: slideDown var(--animation-duration-base) var(--animation-ease-out);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-var(--spacing-2));
+    height: 0;
+    margin-top: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    height: auto;
+    margin-top: var(--spacing-3);
+  }
+}
+
+.strengthHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-2);
+}
+
+.strengthLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.strengthValue {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.strengthBar {
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-background-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--spacing-2);
+}
+
+.strengthProgress {
+  height: 100%;
+  transition: all var(--animation-duration-base) var(--animation-ease-in-out);
+  border-radius: var(--radius-full);
+}
+
+.strengthFeedback {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.feedbackLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.feedbackItems {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  line-height: var(--line-height-tight);
+}
+
+/* Error Messages */
+.submitError {
+  padding: var(--spacing-3);
+  background-color: var(--color-error-50);
+  border: 1px solid var(--color-error-200);
+  border-radius: var(--radius-base);
+  color: var(--color-error-700);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  animation: shake var(--animation-duration-base) var(--animation-ease-in-out);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* Login Link */
+.loginLink {
+  margin-top: var(--spacing-6);
+  text-align: center;
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.loginLink p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-base);
+}
+
+.link {
+  color: var(--color-primary-600);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--animation-duration-base) var(--animation-ease-in-out);
+}
+
+.link:hover {
+  color: var(--color-primary-700);
+  text-decoration: underline;
+}
+
+.link:focus {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .passwordStrength {
+    padding: var(--spacing-2);
+  }
+  
+  .strengthFeedback {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-1);
+  }
+  
+  .feedbackLabel {
+    margin-bottom: var(--spacing-1);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .passwordStrength {
+    animation: none;
+  }
+  
+  .strengthProgress {
+    transition: none;
+  }
+  
+  .submitError {
+    animation: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .passwordStrength {
+    border-width: 2px;
+  }
+  
+  .strengthBar {
+    border: 1px solid var(--color-border-primary);
+  }
+  
+  .submitError {
+    border-width: 2px;
+  }
+}
+
+/* Dark Mode Support (Future) */
+@media (prefers-color-scheme: dark) {
+  .passwordStrength {
+    background-color: rgba(97, 31, 105, 0.1);
+    border-color: rgba(97, 31, 105, 0.2);
+  }
+}
