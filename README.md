@@ -97,8 +97,8 @@ Visit our [Storybook documentation](https://ankish-ui-components.netlify.app) to
 
 ```bash
 # Clone the repository
-git clone https://github.com/ankish8/ui-components.git
-cd ui-components
+git clone https://github.com/Ankish8/Mapit-React-storybook.git
+cd Mapit-React-storybook
 
 # Install dependencies
 npm install
@@ -197,10 +197,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- [📚 Storybook Documentation](https://ankish-ui-components.netlify.app)
+- [📚 Storybook Documentation](https://mapit-react-storybook.netlify.app)
 - [📦 NPM Package](https://www.npmjs.com/package/@ankish/ui-components)
-- [🐛 Bug Reports](https://github.com/ankish8/ui-components/issues)
-- [💡 Feature Requests](https://github.com/ankish8/ui-components/discussions)
+- [🐛 Bug Reports](https://github.com/Ankish8/Mapit-React-storybook/issues)
+- [💡 Feature Requests](https://github.com/Ankish8/Mapit-React-storybook/discussions)
 
 ## 📊 Stats
 

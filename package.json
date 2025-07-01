@@ -48,12 +48,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ankish8/ui-components.git"
+    "url": "https://github.com/Ankish8/Mapit-React-storybook.git"
   },
   "bugs": {
-    "url": "https://github.com/ankish8/ui-components/issues"
+    "url": "https://github.com/Ankish8/Mapit-React-storybook/issues"
   },
-  "homepage": "https://ankish-ui-components.netlify.app",
+  "homepage": "https://mapit-react-storybook.netlify.app",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"

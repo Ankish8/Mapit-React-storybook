@@ -9,8 +9,8 @@
 
 ### 2. **Push Your Code**
 ```bash
-# Add your GitHub repository (replace with your actual URL)
-git remote add origin https://github.com/ankish8/ui-components.git
+# Add your GitHub repository
+git remote add origin https://github.com/Ankish8/Mapit-React-storybook.git
 
 # Push your code
 git push -u origin main
@@ -40,9 +40,9 @@ npm publish --access public
 
 ### 5. **Your Live URLs**
 After deployment, you'll have:
-- **📚 Storybook**: `https://your-site-name.netlify.app`
+- **📚 Storybook**: `https://mapit-react-storybook.netlify.app`
 - **📦 NPM Package**: `https://npmjs.com/package/@ankish/ui-components`
-- **💾 Source Code**: `https://github.com/ankish8/ui-components`
+- **💾 Source Code**: `https://github.com/Ankish8/Mapit-React-storybook`
 
 ## 🎯 Using Your Component Library
 

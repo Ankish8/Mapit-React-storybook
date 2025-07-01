@@ -45,7 +45,7 @@ git add .
 git commit -m "Initial commit: Complete UI component library setup"
 
 # Create repository on GitHub, then:
-git remote add origin https://github.com/ankish8/ui-components.git
+git remote add origin https://github.com/Ankish8/Mapit-React-storybook.git
 git push -u origin main
 ```
 
@@ -141,9 +141,9 @@ import '@ankish/ui-components/dist/style.css';
 
 ## 🌐 Live URLs (After Deployment)
 
-- **📚 Storybook**: `https://ankish-ui-components.netlify.app`
+- **📚 Storybook**: `https://mapit-react-storybook.netlify.app`
 - **📦 NPM Package**: `https://www.npmjs.com/package/@ankish/ui-components`
-- **💾 GitHub Repo**: `https://github.com/ankish8/ui-components`
+- **💾 GitHub Repo**: `https://github.com/Ankish8/Mapit-React-storybook`
 
 ## 🔄 Making Updates
 
