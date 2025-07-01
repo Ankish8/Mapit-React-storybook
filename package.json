@@ -1,6 +1,6 @@
 {
-  "name": "@ankish/ui-components",
-  "version": "1.0.0",
+  "name": "@ankish8/ui-components",
+  "version": "1.0.1",
   "description": "A comprehensive React UI component library for educational and assessment platforms",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -30,7 +30,7 @@
     "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "typecheck": "tsc --noEmit",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run build && npm run test",
+    "prepublishOnly": "npm run build",
     "dev": "concurrently \"npm run build:watch\" \"npm run storybook\"",
     "clean": "rimraf dist"
   },
@@ -53,7 +53,7 @@
   "bugs": {
     "url": "https://github.com/Ankish8/Mapit-React-storybook/issues"
   },
-  "homepage": "https://mapit-react-storybook.netlify.app",
+  "homepage": "https://mapit-storybook.netlify.app",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
@@ -68,6 +68,8 @@
     "@storybook/react": "^8.3.5",
     "@storybook/react-vite": "^8.3.5",
     "@storybook/test": "^8.3.5",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",

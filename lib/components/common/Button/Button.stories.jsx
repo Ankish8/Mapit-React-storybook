@@ -7,7 +7,7 @@ export default {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A versatile button component with multiple variants, sizes, and states. Supports icons, loading states, and full customization.',
+        component: 'A versatile button component with multiple variants, sizes, and states. Supports icons, loading states, and full customization. ✨ Auto-deployment test!',
       },
     },
   },
