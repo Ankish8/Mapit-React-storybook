@@ -1,78 +1,68 @@
-# 🎨 Ankish UI Components
+# Ankish UI Components
 
-A comprehensive React UI component library designed for educational and assessment platforms. Built with modern React patterns, TypeScript support, and comprehensive Storybook documentation.
+A React component library for building educational and assessment platforms. Contains reusable UI components with TypeScript support and Storybook documentation.
 
-## 🚀 Features
-
-- 📱 **Responsive Design** - Mobile-first components that work everywhere
-- ♿ **Accessibility** - WCAG compliant with proper ARIA attributes
-- 🎨 **Themeable** - CSS custom properties for easy customization
-- 📚 **Well Documented** - Comprehensive Storybook documentation
-- 🔧 **TypeScript Ready** - Full TypeScript support
-- 🧪 **Tested** - Unit tests for all components
-- 📦 **Tree Shakeable** - Import only what you need
-
-## 📦 Installation
+## Installation
 
 ```bash
-npm install @ankish/ui-components
-# or
-yarn add @ankish/ui-components
+npm install @ankish8/ui-components
 ```
 
-## 🎯 Quick Start
+## Basic Usage
 
 ```jsx
 import React from 'react';
-import { Button, Card, Input } from '@ankish/ui-components';
-import '@ankish/ui-components/dist/styles.css';
+import { Button, Card, Input } from '@ankish8/ui-components';
+import '@ankish8/ui-components/dist/style.css';
 
 function App() {
   return (
     <Card>
-      <h2>Welcome to Ankish UI</h2>
-      <Input label="Your Name" placeholder="Enter your name" />
-      <Button variant="primary">Get Started</Button>
+      <h2>My App</h2>
+      <Input label="Name" placeholder="Enter your name" />
+      <Button variant="primary">Submit</Button>
     </Card>
   );
 }
-
-export default App;
 ```
 
-## 📖 Components
+## What's Included
 
-### Core Components
-- **Button** - Versatile button component with multiple variants
-- **Card** - Flexible container for content organization
-- **Input** - Form input with validation and styling
-- **Modal** - Accessible modal dialogs
-- **Header** - Navigation and page headers
-- **Form** - Form wrapper with validation support
+### Basic Components
+- **Button** - Different button styles and sizes
+- **Card** - Container for content
+- **Input** - Form inputs with labels
+- **Modal** - Popup dialogs
+- **Header** - Page headers
+- **Form** - Form wrapper
 
 ### Layout Components
-- **ProgressSteps** - Multi-step process visualization
-- **ResponsiveProgressSteps** - Mobile-friendly progress indicator
-- **FloatingFooter** - Sticky bottom action bar
-- **Tab** - Tabbed navigation component
+- **ProgressSteps** - Show progress through steps
+- **ResponsiveProgressSteps** - Mobile-friendly progress
+- **FloatingFooter** - Bottom action bar
+- **Tab** - Tab navigation
 
-### Specialized Components
-- **QuestionTypeSelector** - Educational content type picker
-- **CodeEditor** - Syntax-highlighted code editing
-- **LanguageList** - Programming language selection
-- **TestCases** - Test case management interface
-- **SkillsInput** - Tag-based skills selection
+### Educational Components
+- **QuestionTypeSelector** - Pick question types
+- **CodeEditor** - Code editing with syntax highlighting
+- **LanguageList** - Select programming languages
+- **TestCases** - Manage test cases
+- **SkillsInput** - Tag-based skill selection
 
-### Page Components
-- **DefaultCodes** - Code template management
-- **MediaResources** - File upload and media handling
-- **SubmissionQuestions** - Assessment question builder
-- **FillInTheBlanks** - Interactive fill-in-the-blank questions
-- **EvaluationParameters** - Assessment configuration
+### Page Templates
+- **DefaultCodes** - Code templates
+- **MediaResources** - File uploads
+- **SubmissionQuestions** - Question builder
+- **FillInTheBlanks** - Fill-in-the-blank questions
+- **EvaluationParameters** - Assessment settings
 
-## 🎨 Theming
+## Documentation
 
-The component library uses CSS custom properties for theming:
+Check out the [live documentation](https://mapit-storybook.netlify.app) to see all components with examples and try them out.
+
+## Customization
+
+You can customize colors using CSS variables:
 
 ```css
 :root {
@@ -80,44 +70,13 @@ The component library uses CSS custom properties for theming:
   --secondary-color: #6c757d;
   --success-color: #28a745;
   --danger-color: #dc3545;
-  --warning-color: #ffc107;
-  --info-color: #17a2b8;
 }
 ```
 
-## 📚 Documentation
+## Example: Simple Form
 
-Visit our [Storybook documentation](https://ankish-ui-components.netlify.app) to:
-- Browse all components interactively
-- View component APIs and props
-- See usage examples and best practices
-- Test components in different states
-
-## 🛠 Development
-
-```bash
-# Clone the repository
-git clone https://github.com/Ankish8/Mapit-React-storybook.git
-cd Mapit-React-storybook
-
-# Install dependencies
-npm install
-
-# Start Storybook development server
-npm run storybook
-
-# Build the package
-npm run build
-
-# Run tests
-npm test
-```
-
-## 📝 Usage Examples
-
-### Basic Form
 ```jsx
-import { Form, Input, Button, Card } from '@ankish/ui-components';
+import { Form, Input, Button, Card } from '@ankish8/ui-components';
 
 function ContactForm() {
   return (
@@ -126,17 +85,16 @@ function ContactForm() {
         <Input 
           label="Email" 
           type="email" 
-          required 
           placeholder="your@email.com" 
         />
         <Input 
           label="Message" 
           multiline 
           rows={4} 
-          placeholder="Your message..." 
+          placeholder="Your message" 
         />
         <Button type="submit" variant="primary">
-          Send Message
+          Send
         </Button>
       </Form>
     </Card>
@@ -144,71 +102,21 @@ function ContactForm() {
 }
 ```
 
-### Progress Steps
-```jsx
-import { ProgressSteps } from '@ankish/ui-components';
+## Requirements
 
-const steps = [
-  { id: 1, label: 'Personal Info' },
-  { id: 2, label: 'Preferences' },
-  { id: 3, label: 'Review' },
-  { id: 4, label: 'Complete' }
-];
+- React 16.8+
+- React DOM 16.8+
 
-function Wizard() {
-  return (
-    <ProgressSteps 
-      steps={steps} 
-      currentStep={2} 
-    />
-  );
-}
-```
+## License
 
-### Code Editor
-```jsx
-import { CodeEditor } from '@ankish/ui-components';
+MIT License - see [LICENSE](LICENSE) file.
 
-function CodeDemo() {
-  return (
-    <CodeEditor
-      language="javascript"
-      value="console.log('Hello World!');"
-      onChange={handleCodeChange}
-      theme="dark"
-    />
-  );
-}
-```
+## Links
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🔗 Links
-
-- [📚 Storybook Documentation](https://mapit-react-storybook.netlify.app)
-- [📦 NPM Package](https://www.npmjs.com/package/@ankish/ui-components)
-- [🐛 Bug Reports](https://github.com/Ankish8/Mapit-React-storybook/issues)
-- [💡 Feature Requests](https://github.com/Ankish8/Mapit-React-storybook/discussions)
-
-## 📊 Stats
-
-![npm version](https://img.shields.io/npm/v/@ankish/ui-components)
-![npm downloads](https://img.shields.io/npm/dm/@ankish/ui-components)
-![bundle size](https://img.shields.io/bundlephobia/minzip/@ankish/ui-components)
-![license](https://img.shields.io/npm/l/@ankish/ui-components)
+- [Documentation](https://mapit-storybook.netlify.app)
+- [NPM Package](https://www.npmjs.com/package/@ankish8/ui-components)
+- [Source Code](https://github.com/Ankish8/Mapit-React-storybook)
 
 ---
 
-Made with ❤️ by [Ankish](https://github.com/ankish8)
+Built by Ankish for educational platforms.

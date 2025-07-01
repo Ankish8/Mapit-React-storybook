@@ -48,9 +48,14 @@ const Button = ({
     >
       {loading && <div className={styles.loadingSpinner} />}
       {icon && iconPosition === 'left' && <span className={styles.icon}>{icon}</span>}
-      {!iconOnly && children}
+      {iconOnly ? (
+        // When iconOnly is true, show only icon if available, otherwise show children as fallback
+        icon ? null : <span className={styles.iconFallback}>{children}</span>
+      ) : (
+        // When iconOnly is false, always show children
+        children
+      )}
       {icon && iconPosition === 'right' && <span className={styles.icon}>{icon}</span>}
-      {iconOnly && !icon && children}
     </Component>
   );
 };
