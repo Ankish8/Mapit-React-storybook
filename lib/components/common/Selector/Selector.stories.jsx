@@ -280,3 +280,62 @@ export const ComplexExample = {
     );
   },
 };
+
+// Edge case stories
+export const EmptyOptions = {
+  render: () => (
+    <SelectorExample
+      variant="single"
+      options={[]}
+      label="Empty Options"
+      helperText="Testing with no options available"
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing selector behavior with empty options array.',
+      },
+    },
+  },
+};
+
+export const NullSelectedValue = {
+  render: () => (
+    <Selector
+      variant="single"
+      options={difficultyOptions}
+      selectedValue={null}
+      onSelectionChange={() => {}}
+      label="Null Selected Value"
+      helperText="Testing with null selectedValue (should not error)"
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing single selector with null selectedValue - should not cause selection issues.',
+      },
+    },
+  },
+};
+
+export const UndefinedSelectedValues = {
+  render: () => (
+    <Selector
+      variant="multiple"
+      options={difficultyOptions}
+      selectedValues={undefined}
+      onSelectionChange={() => {}}
+      label="Undefined Selected Values"
+      helperText="Testing with undefined selectedValues array"
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing multiple selector with undefined selectedValues - should default to empty array behavior.',
+      },
+    },
+  },
+};

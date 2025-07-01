@@ -68,91 +68,25 @@ export const Interactive = {
 
 export const CustomContent = {
   render: () => {
-    // Create a custom version to show flexibility
-    const CustomToggleCard = ({ enabled, onToggle, title, description }) => {
-      const handleToggle = (e) => {
-        onToggle(e.target.checked);
-      };
-
-      return (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '20px',
-          border: '1px solid var(--color-border-primary, #eaecf0)',
-          borderRadius: '8px',
-          backgroundColor: 'var(--color-background-primary, #ffffff)',
-          gap: '16px'
-        }}>
-          <div style={{ flex: 1 }}>
-            <h3 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: '600' }}>
-              {title}
-            </h3>
-            <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-text-secondary, #667085)' }}>
-              {description}
-            </p>
-          </div>
-          <label style={{
-            position: 'relative',
-            display: 'inline-block',
-            width: '44px',
-            height: '24px',
-          }}>
-            <input
-              type="checkbox"
-              checked={enabled}
-              onChange={handleToggle}
-              style={{ opacity: 0, width: 0, height: 0 }}
-            />
-            <span style={{
-              position: 'absolute',
-              cursor: 'pointer',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: enabled ? 'var(--color-primary-600, #7f56d9)' : 'var(--color-secondary-300, #d0d5dd)',
-              transition: '0.2s',
-              borderRadius: '24px',
-            }}>
-              <span style={{
-                position: 'absolute',
-                content: '""',
-                height: '20px',
-                width: '20px',
-                left: enabled ? '22px' : '2px',
-                bottom: '2px',
-                backgroundColor: 'white',
-                transition: '0.2s',
-                borderRadius: '50%',
-                display: 'block'
-              }} />
-            </span>
-          </label>
-        </div>
-      );
-    };
-
     const [notifications, setNotifications] = useState(true);
     const [analytics, setAnalytics] = useState(false);
     const [sharing, setSharing] = useState(true);
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '500px' }}>
-        <CustomToggleCard
+        <ToggleCard
           enabled={notifications}
           onToggle={setNotifications}
           title="Email Notifications"
           description="Receive email updates about question submissions and candidate progress"
         />
-        <CustomToggleCard
+        <ToggleCard
           enabled={analytics}
           onToggle={setAnalytics}
           title="Analytics Tracking"
           description="Allow collection of anonymous usage data to improve the platform"
         />
-        <CustomToggleCard
+        <ToggleCard
           enabled={sharing}
           onToggle={setSharing}
           title="Public Sharing"
@@ -161,4 +95,82 @@ export const CustomContent = {
       </div>
     );
   },
+};
+
+// Edge case stories
+export const NoCallback = {
+  args: {
+    enabled: true,
+    onToggle: undefined,
+    title: "No callback function",
+    description: "This toggle has no onToggle callback - should not crash when clicked"
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing ToggleCard with no onToggle callback. Should not crash when clicked.'
+      }
+    }
+  }
+};
+
+export const DisabledState = {
+  args: {
+    enabled: false,
+    disabled: true,
+    title: "Disabled toggle",
+    description: "This toggle is disabled and cannot be interacted with"
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing ToggleCard in disabled state. Toggle should be non-interactive.'
+      }
+    }
+  }
+};
+
+export const LongContent = {
+  args: {
+    enabled: false,
+    title: "Very long title that might wrap to multiple lines in smaller containers or when the text is too long",
+    description: "This is a very long description that tests how the component handles text wrapping and layout when the content exceeds the normal expected length. It should maintain proper spacing and alignment even with lengthy text content."
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing ToggleCard with very long title and description to ensure proper text wrapping.'
+      }
+    }
+  }
+};
+
+export const EmptyContent = {
+  args: {
+    enabled: false,
+    title: "",
+    description: ""
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing ToggleCard with empty title and description. Should render with minimal content.'
+      }
+    }
+  }
+};
+
+export const SpecialCharacters = {
+  args: {
+    enabled: true,
+    title: "Title with <script>alert('xss')</script> & special chars",
+    description: "Description with émojis 🎉, symbols & <b>HTML</b> tags that should be escaped"
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing ToggleCard with special characters and potential XSS content. Content should be safely rendered.'
+      }
+    }
+  }
 };

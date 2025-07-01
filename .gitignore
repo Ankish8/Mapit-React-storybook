@@ -115,3 +115,5 @@ lib-cov
 *.dat
 *.out
 *.gz
+# Local Netlify folder
+.netlify

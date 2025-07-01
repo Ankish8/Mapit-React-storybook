@@ -2,14 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './ResponsiveProgressSteps.module.css';
 
 const ResponsiveProgressSteps = ({ 
-  steps, 
-  currentStep, 
+  steps = [], 
+  currentStep = 1, 
   variant = 'horizontal', // 'horizontal', 'vertical', 'adaptive'
   showLabelsOnMobile = false,
   compact = false,
   className 
 }) => {
-  const [activeStepIndex, setActiveStepIndex] = useState(currentStep - 1);
+  // Validate and clamp currentStep to valid range
+  const validCurrentStep = Math.max(1, Math.min(currentStep, steps.length || 1));
+  const [activeStepIndex, setActiveStepIndex] = useState(validCurrentStep - 1);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const containerRef = useRef(null);
   const stepsRef = useRef(null);
@@ -44,13 +46,13 @@ const ResponsiveProgressSteps = ({
   }, [activeStepIndex, variant]);
 
   useEffect(() => {
-    setActiveStepIndex(currentStep - 1);
-  }, [currentStep]);
+    setActiveStepIndex(validCurrentStep - 1);
+  }, [validCurrentStep]);
 
   const renderStep = (step, index) => {
     const stepNumber = index + 1;
-    const isCompleted = stepNumber < currentStep;
-    const isActive = stepNumber === currentStep;
+    const isCompleted = stepNumber < validCurrentStep;
+    const isActive = stepNumber === validCurrentStep;
     
     return (
       <div 
@@ -89,7 +91,7 @@ const ResponsiveProgressSteps = ({
   };
 
   const renderDivider = (index) => {
-    const isCompleted = (index + 1) < currentStep;
+    const isCompleted = (index + 1) < validCurrentStep;
     return (
       <div 
         key={`divider-${index}`}
@@ -107,7 +109,7 @@ const ResponsiveProgressSteps = ({
             <React.Fragment key={step.id}>
               {renderStep(step, index)}
               {index < steps.length - 1 && (
-                <div className={`${styles.verticalDivider} ${(index + 1) < currentStep ? styles.completedDivider : ''}`} />
+                <div className={`${styles.verticalDivider} ${(index + 1) < validCurrentStep ? styles.completedDivider : ''}`} />
               )}
             </React.Fragment>
           ))}
@@ -121,20 +123,20 @@ const ResponsiveProgressSteps = ({
       ref={containerRef}
       className={`${styles.container} ${styles.horizontal} ${compact ? styles.compact : ''} ${className || ''}`}
       role="progressbar"
-      aria-valuenow={currentStep}
+      aria-valuenow={validCurrentStep}
       aria-valuemin={1}
       aria-valuemax={steps.length}
-      aria-label={`Step ${currentStep} of ${steps.length}: ${steps[currentStep - 1]?.label}`}
+      aria-label={`Step ${validCurrentStep} of ${steps.length}: ${steps[validCurrentStep - 1]?.label || 'Unknown step'}`}
     >
       {/* Progress indicator for mobile */}
       <div className={styles.progressIndicator}>
         <span className={styles.progressText}>
-          Step {currentStep} of {steps.length}
+          Step {validCurrentStep} of {steps.length}
         </span>
         <div className={styles.progressBar}>
           <div 
             className={styles.progressFill}
-            style={{ width: `${(currentStep / steps.length) * 100}%` }}
+            style={{ width: `${steps.length > 0 ? (validCurrentStep / steps.length) * 100 : 0}%` }}
           />
         </div>
       </div>

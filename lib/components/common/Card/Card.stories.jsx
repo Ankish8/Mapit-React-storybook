@@ -471,3 +471,95 @@ export const CardGrid = {
     </div>
   ),
 };
+
+// Edge case stories
+export const EmptyCard = {
+  args: {
+    children: null
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Card component with no content. Should render empty card gracefully.'
+      }
+    }
+  }
+};
+
+export const OnlyTitle = {
+  args: {
+    title: 'Card with only title'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Card component with only title, no content or subtitle.'
+      }
+    }
+  }
+};
+
+export const ClickableWithoutOnClick = {
+  args: {
+    title: 'Clickable without handler',
+    children: 'This card is marked as clickable but has no onClick handler',
+    clickable: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Card component marked as clickable but without onClick handler. Should not crash.'
+      }
+    }
+  }
+};
+
+export const LongContent = {
+  args: {
+    title: 'Card with very long content that might overflow',
+    subtitle: 'This subtitle is also quite long and might wrap to multiple lines in smaller screens',
+    children: Array.from({ length: 10 }, (_, i) => `This is line ${i + 1} of very long content that should test how the card handles content overflow and text wrapping. `).join('')
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Card component with very long content to ensure proper text wrapping and layout handling.'
+      }
+    }
+  }
+};
+
+export const CustomHeader = {
+  args: {
+    header: (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ 
+          width: '32px', 
+          height: '32px', 
+          borderRadius: '50%', 
+          backgroundColor: '#10b981',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          fontSize: '14px',
+          fontWeight: '600'
+        }}>
+          A
+        </div>
+        <div>
+          <h3 style={{ margin: 0, fontSize: '16px' }}>Custom Header</h3>
+          <p style={{ margin: 0, fontSize: '12px', color: '#6b7280' }}>With avatar</p>
+        </div>
+      </div>
+    ),
+    children: 'This card uses a completely custom header instead of title/subtitle.'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Card component with custom header that overrides title/subtitle/action.'
+      }
+    }
+  }
+};

@@ -288,3 +288,90 @@ export const FormExample = {
     );
   },
 };
+
+// Edge case stories
+export const NoCallbacks = {
+  args: {
+    selectedSkills: ['JavaScript', 'React'],
+    onOpenModal: undefined,
+    onRemoveSkill: undefined
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing SkillsInput with no callback functions. Should not crash when buttons are clicked.'
+      }
+    }
+  }
+};
+
+export const EmptySkillsArray = {
+  args: {
+    selectedSkills: [],
+    onOpenModal: () => console.log('Open modal'),
+    onRemoveSkill: () => console.log('Remove skill')
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing SkillsInput with empty skills array. Should show "Add skills" placeholder.'
+      }
+    }
+  }
+};
+
+export const UndefinedSkills = {
+  args: {
+    selectedSkills: undefined,
+    onOpenModal: () => console.log('Open modal'),
+    onRemoveSkill: () => console.log('Remove skill')
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing SkillsInput with undefined selectedSkills. Should fallback to empty array.'
+      }
+    }
+  }
+};
+
+export const SkillsWithSpecialCharacters = {
+  render: () => (
+    <SkillsInputExample
+      initialSkills={[
+        'C++',
+        'C#',
+        '.NET',
+        'Node.js',
+        'Vue.js',
+        'React/Redux',
+        'HTML & CSS',
+        'API Integration',
+        'Machine Learning (ML)',
+        'DevOps & CI/CD'
+      ]}
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing SkillsInput with skills that contain special characters, symbols, and spacing.'
+      }
+    }
+  }
+};
+
+export const DuplicateSkills = {
+  render: () => (
+    <SkillsInputExample
+      initialSkills={['JavaScript', 'javascript', 'JAVASCRIPT', 'JS']}
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing SkillsInput with duplicate/similar skills. Note: This shows current behavior - component does not deduplicate.'
+      }
+    }
+  }
+};

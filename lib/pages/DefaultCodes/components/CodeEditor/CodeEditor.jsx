@@ -16,15 +16,15 @@ const LANGUAGE_DISPLAY_NAMES = {
 };
 
 export function CodeEditor({
-  language,
-  code,
-  theme,
-  savedBadgeVisible,
-  onCodeChange,
-  onThemeToggle,
-  onCopy,
-  onFormat,
-  onReset
+  language = 'javascript',
+  code = '',
+  theme = 'light',
+  savedBadgeVisible = false,
+  onCodeChange = () => {},
+  onThemeToggle = () => {},
+  onCopy = () => {},
+  onFormat = () => {},
+  onReset = () => {}
 }) {
   const editorRef = useRef(null);
 

@@ -258,3 +258,78 @@ export const Interactive = {
     }
   }
 };
+
+// Edge case stories
+export const EmptySteps = {
+  args: {
+    steps: [],
+    currentStep: 1,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing ResponsiveProgressSteps with empty steps array. Should render gracefully without errors.'
+      }
+    }
+  }
+};
+
+export const InvalidCurrentStep = {
+  args: {
+    steps: submissionSteps,
+    currentStep: 0, // Invalid - should clamp to 1
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing with invalid currentStep (0). Should clamp to step 1.'
+      }
+    }
+  }
+};
+
+export const ExcessiveCurrentStep = {
+  args: {
+    steps: submissionSteps,
+    currentStep: 10, // Beyond available steps - should clamp to last step
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing with currentStep beyond available steps. Should clamp to last step.'
+      }
+    }
+  }
+};
+
+export const SingleStep = {
+  args: {
+    steps: [{ id: 'only', label: 'Only Step', description: 'The only step available' }],
+    currentStep: 1,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing with only one step. Should render properly without dividers.'
+      }
+    }
+  }
+};
+
+export const StepsWithoutDescriptions = {
+  args: {
+    steps: [
+      { id: 'step1', label: 'Step 1' },
+      { id: 'step2', label: 'Step 2' },
+      { id: 'step3', label: 'Step 3' },
+    ],
+    currentStep: 2,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing with steps that have no description property. Should render labels only.'
+      }
+    }
+  }
+};

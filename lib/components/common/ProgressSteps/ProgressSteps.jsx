@@ -1,14 +1,22 @@
 import React from 'react';
 import styles from './ProgressSteps.module.css';
 
-const ProgressSteps = ({ steps, currentStep }) => {
+const ProgressSteps = ({ steps = [], currentStep = 1 }) => {
+  // Validate inputs
+  if (!steps || steps.length === 0) {
+    return null;
+  }
+  
+  // Ensure currentStep is within valid range
+  const validCurrentStep = Math.max(1, Math.min(currentStep, steps.length));
+  
   return (
     <div className={styles.container}>
       <div className={styles.progressSteps}>
         {steps.map((step, index) => {
           const stepNumber = index + 1;
-          const isCompleted = stepNumber < currentStep;
-          const isActive = stepNumber === currentStep;
+          const isCompleted = stepNumber < validCurrentStep;
+          const isActive = stepNumber === validCurrentStep;
           
           return (
             <React.Fragment key={step.id}>

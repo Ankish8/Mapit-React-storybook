@@ -4,14 +4,20 @@ import styles from './Header.module.css';
 // Hook to safely use navigate only when router context exists
 const useSafeNavigate = () => {
   try {
-    const { useNavigate } = require('react-router-dom');
-    return useNavigate();
+    // Only try to import if react-router-dom is available
+    if (typeof window !== 'undefined' && window.ReactRouterDOM) {
+      const { useNavigate } = window.ReactRouterDOM;
+      return useNavigate();
+    }
+    // Try dynamic import for environments where it's available
+    const reactRouterDom = require('react-router-dom');
+    return reactRouterDom.useNavigate();
   } catch {
     return null;
   }
 };
 
-const Header = ({ title, onBack, showBackButton = true }) => {
+const Header = ({ title = '', onBack, showBackButton = true }) => {
   const navigate = useSafeNavigate();
   
   const handleBack = () => {

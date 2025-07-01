@@ -170,3 +170,82 @@ WithDestructiveAction.args = {
     </>
   )
 };
+
+// Edge case stories
+export const NoChildren = Template.bind({});
+NoChildren.args = {
+  children: null
+};
+NoChildren.parameters = {
+  docs: {
+    description: {
+      story: 'Testing FloatingFooter component with no children. Should render empty footer without errors.'
+    }
+  }
+};
+
+export const EmptyValidationMessage = Template.bind({});
+EmptyValidationMessage.args = {
+  hasValidationAlert: true,
+  validationMessage: '',
+  showAlert: true,
+  children: (
+    <Button variant="primary">Submit</Button>
+  )
+};
+EmptyValidationMessage.parameters = {
+  docs: {
+    description: {
+      story: 'Testing FloatingFooter with validation alert enabled but empty message. Should not show alert.'
+    }
+  }
+};
+
+export const OnlyValidationMessage = Template.bind({});
+OnlyValidationMessage.args = {
+  hasValidationAlert: true,
+  validationMessage: 'This is a validation error message',
+  showAlert: true,
+  children: null
+};
+OnlyValidationMessage.parameters = {
+  docs: {
+    description: {
+      story: 'Testing FloatingFooter with only validation message and no children.'
+    }
+  }
+};
+
+export const LongValidationMessage = Template.bind({});
+LongValidationMessage.args = {
+  hasValidationAlert: true,
+  validationMessage: 'This is a very long validation message that might wrap to multiple lines and should be handled gracefully by the component layout and styling.',
+  showAlert: true,
+  children: (
+    <Button variant="primary">Submit</Button>
+  )
+};
+LongValidationMessage.parameters = {
+  docs: {
+    description: {
+      story: 'Testing FloatingFooter with very long validation message to ensure proper text wrapping.'
+    }
+  }
+};
+
+export const ValidationHiddenByShowAlert = Template.bind({});
+ValidationHiddenByShowAlert.args = {
+  hasValidationAlert: true,
+  validationMessage: 'This message should not be visible',
+  showAlert: false, // Alert is hidden despite having validation
+  children: (
+    <Button variant="primary">Submit</Button>
+  )
+};
+ValidationHiddenByShowAlert.parameters = {
+  docs: {
+    description: {
+      story: 'Testing FloatingFooter with validation message but showAlert=false. Alert should not appear.'
+    }
+  }
+};

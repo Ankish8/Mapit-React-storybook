@@ -365,3 +365,84 @@ export const DefaultActiveTab = {
     }
   }
 };
+
+// Edge case stories
+export const EmptyTabs = {
+  args: {
+    tabs: [],
+    defaultActiveTab: 0
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Tab component with empty tabs array. Should render nothing gracefully.'
+      }
+    }
+  }
+};
+
+export const SingleTab = {
+  args: {
+    tabs: [
+      {
+        id: 'only-tab',
+        label: 'Only Tab',
+        content: <div style={{ padding: '20px' }}>This is the only tab available</div>
+      }
+    ]
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Tab component with only one tab. Navigation should still work properly.'
+      }
+    }
+  }
+};
+
+export const InvalidDefaultActiveTab = {
+  args: {
+    defaultActiveTab: 10, // Index beyond available tabs
+    tabs: [
+      {
+        id: 'tab1',
+        label: 'Tab 1',
+        content: <div style={{ padding: '20px' }}>Tab 1 content (should be active despite invalid defaultActiveTab)</div>
+      },
+      {
+        id: 'tab2',
+        label: 'Tab 2',
+        content: <div style={{ padding: '20px' }}>Tab 2 content</div>
+      }
+    ]
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Tab component with invalid defaultActiveTab index. Should gracefully handle and default to first tab.'
+      }
+    }
+  }
+};
+
+export const TabsWithoutIds = {
+  args: {
+    tabs: [
+      {
+        label: 'No ID Tab 1',
+        content: <div style={{ padding: '20px' }}>Content for tab without ID (uses index)</div>
+      },
+      {
+        label: 'No ID Tab 2',
+        content: <div style={{ padding: '20px' }}>Another tab without ID</div>
+      }
+    ]
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing Tab component with tabs that have no id property. Should use array index as fallback.'
+      }
+    }
+  }
+};

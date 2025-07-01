@@ -19,10 +19,14 @@ const Selector = ({
   ...props
 }) => {
   const isMultiple = variant === 'multiple';
-  const selected = isMultiple ? selectedValues : [selectedValue];
+  const selected = isMultiple ? selectedValues : (selectedValue ? [selectedValue] : []);
 
   const handleOptionClick = (optionValue) => {
     if (disabled) return;
+    
+    // Find the option to check if it's disabled
+    const option = options.find(opt => opt.value === optionValue);
+    if (option?.disabled) return;
 
     if (isMultiple) {
       const newSelected = selected.includes(optionValue)

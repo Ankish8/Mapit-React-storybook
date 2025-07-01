@@ -33,9 +33,20 @@ const CodeEditorExample = ({
   const [theme, setTheme] = useState(initialTheme);
   const [savedBadgeVisible, setSavedBadgeVisible] = useState(false);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code);
-    console.log('Code copied to clipboard');
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      console.log('Code copied to clipboard');
+    } catch (error) {
+      console.error('Failed to copy code:', error);
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = code;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+    }
   };
 
   const handleFormat = () => {
@@ -226,7 +237,14 @@ export const WithSavedBadge = {
           savedBadgeVisible={true}
           onCodeChange={setCode}
           onThemeToggle={() => {}}
-          onCopy={() => console.log('Copied')}
+          onCopy={async () => {
+            try {
+              await navigator.clipboard.writeText(code);
+              console.log('Copied');
+            } catch (error) {
+              console.error('Copy failed:', error);
+            }
+          }}
           onFormat={() => console.log('Formatted')}
           onReset={() => setCode('console.log("This code is saved!");')}
         />
@@ -274,5 +292,40 @@ export const MultipleLanguages = {
         />
       </div>
     );
+  },
+};
+
+export const CodeEditorWithErrors = {
+  render: () => {
+    const [code, setCode] = useState('// Test invalid language and empty code\n');
+    
+    return (
+      <div style={{ maxWidth: '800px', width: '100%' }}>
+        <CodeEditor
+          language="invalidlang" // Invalid language
+          code={code}
+          theme="light"
+          onCodeChange={setCode}
+          onThemeToggle={() => {}}
+          onCopy={async () => {
+            try {
+              await navigator.clipboard.writeText(code);
+              console.log('Copy attempted');
+            } catch (error) {
+              console.error('Copy failed:', error);
+            }
+          }}
+          onFormat={() => console.log('Format attempted')}
+          onReset={() => setCode('')} // Reset to empty
+        />
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing CodeEditor with invalid language and edge cases like empty code.',
+      },
+    },
   },
 };

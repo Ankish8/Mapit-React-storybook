@@ -346,3 +346,89 @@ export const CodeEditorIntegration = {
     );
   },
 };
+
+// Edge case stories
+export const NoCallbacks = {
+  args: {
+    selectedLanguages: new Set(['javascript', 'python']),
+    currentLanguage: 'javascript',
+    onLanguageSelect: undefined,
+    onLanguageChange: undefined
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing LanguageList with no callback functions. Should not crash when languages are clicked.'
+      }
+    }
+  }
+};
+
+export const UndefinedSelectedLanguages = {
+  args: {
+    selectedLanguages: undefined,
+    currentLanguage: 'javascript',
+    onLanguageSelect: () => console.log('Language selected'),
+    onLanguageChange: () => console.log('Language changed')
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing LanguageList with undefined selectedLanguages. Should fallback to empty Set.'
+      }
+    }
+  }
+};
+
+export const InvalidCurrentLanguage = {
+  args: {
+    selectedLanguages: new Set(['javascript', 'python']),
+    currentLanguage: 'nonexistent',
+    onLanguageSelect: () => console.log('Language selected'),
+    onLanguageChange: () => console.log('Language changed')
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing LanguageList with invalid currentLanguage. Should render without errors.'
+      }
+    }
+  }
+};
+
+export const CurrentLanguageNotSelected = {
+  args: {
+    selectedLanguages: new Set(['java', 'cpp']),
+    currentLanguage: 'javascript', // Current language is not in selected set
+    onLanguageSelect: () => console.log('Language selected'),
+    onLanguageChange: () => console.log('Language changed')
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing LanguageList where currentLanguage is not in selectedLanguages. Should handle gracefully.'
+      }
+    }
+  }
+};
+
+export const AccessibilityFocus = {
+  render: () => (
+    <div style={{ width: '300px' }}>
+      <p style={{ marginBottom: '16px', fontSize: '14px' }}>
+        Use Tab to navigate between languages, Enter/Space to select. Test keyboard navigation.
+      </p>
+      <LanguageListExample
+        initialSelected={new Set(['javascript', 'python'])}
+        initialCurrent="javascript"
+      />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Testing LanguageList accessibility features - keyboard navigation and ARIA attributes.'
+      }
+    }
+  }
+};

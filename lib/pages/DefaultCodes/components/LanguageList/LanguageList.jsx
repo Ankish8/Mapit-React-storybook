@@ -16,22 +16,26 @@ const LANGUAGES = [
 ];
 
 export function LanguageList({ 
-  selectedLanguages, 
-  currentLanguage, 
-  onLanguageSelect, 
-  onLanguageChange 
+  selectedLanguages = new Set(), 
+  currentLanguage = '', 
+  onLanguageSelect = () => {}, 
+  onLanguageChange = () => {} 
 }) {
   const handleLanguageClick = (languageId) => {
+    if (typeof onLanguageSelect !== 'function') return;
+    
     onLanguageSelect(languageId);
     
     // If this language is now selected, make it current
     if (!selectedLanguages.has(languageId)) {
       // Language was just selected, make it current
-      onLanguageChange(languageId);
+      if (typeof onLanguageChange === 'function') {
+        onLanguageChange(languageId);
+      }
     } else if (selectedLanguages.has(languageId) && currentLanguage === languageId) {
       // If deselecting the current language, switch to another selected language
       const remainingLanguages = Array.from(selectedLanguages).filter(id => id !== languageId);
-      if (remainingLanguages.length > 0) {
+      if (remainingLanguages.length > 0 && typeof onLanguageChange === 'function') {
         onLanguageChange(remainingLanguages[0]);
       }
     }
@@ -39,13 +43,13 @@ export function LanguageList({
 
   const handleLanguageSelect = (languageId) => {
     // Just change the current language without selecting/deselecting
-    if (selectedLanguages.has(languageId)) {
+    if (selectedLanguages.has(languageId) && typeof onLanguageChange === 'function') {
       onLanguageChange(languageId);
     }
   };
 
   return (
-    <div className={styles.languageList}>
+    <div className={styles.languageList} role="listbox" aria-label="Programming languages">
       {LANGUAGES.map((language) => {
         const isSelected = selectedLanguages.has(language.id);
         const isCurrent = currentLanguage === language.id;
@@ -56,8 +60,18 @@ export function LanguageList({
             className={`${styles.languageItem} ${isSelected ? styles.selected : ''} ${isCurrent ? styles.current : ''}`}
             onClick={() => handleLanguageClick(language.id)}
             onDoubleClick={() => handleLanguageSelect(language.id)}
+            role="option"
+            aria-selected={isSelected}
+            aria-current={isCurrent ? 'true' : 'false'}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleLanguageClick(language.id);
+              }
+            }}
           >
-            <div className={styles.languageCheckbox}>
+            <div className={styles.languageCheckbox} aria-hidden="true">
               {isSelected && <span className={styles.checkmark}>✓</span>}
             </div>
             <div className={styles.languageInfo}>
